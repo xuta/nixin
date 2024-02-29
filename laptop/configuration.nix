@@ -35,30 +35,39 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [ /* any engine you want, for example */ m17n bamboo ];
+   };
+  # i18n.defaultLocale = "vi_VN";
 
   # i18n.extraLocaleSettings = {
-  #   LC_ADDRESS = "vi_VN";
-  #   LC_IDENTIFICATION = "vi_VN";
-  #   LC_MEASUREMENT = "vi_VN";
-  #   LC_MONETARY = "vi_VN";
-  #   LC_NAME = "vi_VN";
-  #   LC_NUMERIC = "vi_VN";
-  #   LC_PAPER = "vi_VN";
-  #   LC_TELEPHONE = "vi_VN";
-  #   LC_TIME = "vi_VN";
+  #   LC_ADDRESS = "en_US.UTF-8";
+  #   LC_IDENTIFICATION = "en_US.UTF-8";
+  #   LC_MEASUREMENT = "en_US.UTF-8";
+  #   LC_MONETARY = "en_US.UTF-8";
+  #   LC_NAME = "en_US.UTF-8";
+  #   LC_NUMERIC = "en_US.UTF-8";
+  #   LC_PAPER = "en_US.UTF-8";
+  #   LC_TELEPHONE = "en_US.UTF-8";
+  #   LC_TIME = "en_US.UTF-8";
   # };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # Enable the Cinnamon Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.cinnamon.enable = true;
+  # services.xserver.displayManager.lightdm.enable = true;
+  # services.xserver.desktopManager.cinnamon.enable = true;
+
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    exportConfiguration = true;
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   # Enable CUPS to print documents.
@@ -117,31 +126,31 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    # starter
     bashInteractive
     wget
     curl
     git
-    # python311Packages.bpython
     vim
     helix
 
-    google-chrome
-    firefox
-    meld
-    spotify
-    vlc
-    slack
-    sublime4
-    sublime-merge
-    vscode
-    obsidian
-    syncthing
-    transmission_4-gtk
-    telegram-desktop
-    zoom-us
-    # citrix_workspace  # bug - might need to use unstable package later
+    # google-chrome
+    # firefox
+    # meld
+    # spotify
+    # vlc
+    # slack
+    # sublime4
+    # sublime-merge
+    # vscode
+    # obsidian
+    # syncthing
+    # transmission_4-gtk
+    # telegram-desktop
+    # zoom-us
+    # citrix_workspace_23_02_0 # bug - might need to use unstable package later
 
-    albert
+    # albert
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
