@@ -125,32 +125,12 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    # starter
     bashInteractive
     wget
     curl
     git
     vim
     helix
-
-    # google-chrome
-    # firefox
-    # meld
-    # spotify
-    # vlc
-    # slack
-    # sublime4
-    # sublime-merge
-    # vscode
-    # obsidian
-    # syncthing
-    # transmission_4-gtk
-    # telegram-desktop
-    # zoom-us
-    # citrix_workspace_23_02_0 # bug - might need to use unstable package later
-
-    # albert
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -165,6 +145,42 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+
+  services = {
+    thinkfan = {
+      enable = true;
+
+      # sensors = ''
+      #   # Entries here discovered by:
+      #   # find /sys/devices -type f -name "temp*_input"
+      #   hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp6_input
+      #   hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp3_input
+      #   hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp7_input
+      #   hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp4_input
+      #   hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp1_input
+      #   hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp5_input
+      #   hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp2_input
+      #   hwmon /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon5/temp1_input
+      #   hwmon /sys/devices/pci0000:00/0000:00:01.2/0000:02:00.0/ieee80211/phy0/hwmon7/temp1_input
+      #   hwmon /sys/devices/pci0000:00/0000:00:08.1/0000:66:00.0/hwmon/hwmon4/temp1_input
+      #   hwmon /sys/devices/pci0000:00/0000:00:02.4/0000:05:00.0/nvme/nvme0/hwmon3/temp3_input
+      #   hwmon /sys/devices/pci0000:00/0000:00:02.4/0000:05:00.0/nvme/nvme0/hwmon3/temp1_input
+      #   hwmon /sys/devices/pci0000:00/0000:00:02.4/0000:05:00.0/nvme/nvme0/hwmon3/temp2_input
+      #   hwmon /sys/devices/virtual/thermal/thermal_zone0/hwmon1/temp1_input
+      # '';
+
+      levels = [
+        [0 0  41]
+        [1 40 56]
+        [2 55 61]
+        [3 60 65]
+        [4 64 68]
+        [5 67 78]
+        [6 77 90]
+        [7 87 32767]
+      ];
+    };
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
