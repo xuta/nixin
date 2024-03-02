@@ -122,6 +122,11 @@
     "electron-25.9.0"
   ];
 
+  fonts.fontconfig.enable = true;
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -131,6 +136,8 @@
     git
     vim
     helix
+
+    lm_sensors
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
