@@ -56,6 +56,9 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
@@ -234,6 +237,23 @@
         [6 77 90]
         [7 87 32767]
       ];
+    };
+  };
+
+  systemd.services.sample1 = {
+    enable = false;
+    description = "A sample systemd service";
+    after = [ "network.target" ];
+    wantedBy = [ "default.target" ];
+    script = ''
+      while true; do
+        ${pkgs.coreutils}/bin/date >> /tmp/sample1.log
+        sleep 10
+      done
+    '';
+    serviceConfig = {
+      Type = "exec";
+      User = "xuta";
     };
   };
 
